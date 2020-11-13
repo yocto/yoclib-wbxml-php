@@ -77,8 +77,8 @@ class WBXMLDecoder{
 			if($item['token']===null){
 				$CP = $this->codepages[$page];
 				$prefix = $CP->getPrefix();
-				$namespace = $CP->getCode($item['tag_identity']);
-				$name = (($prefix)?$prefix.':':'').$namespace;
+				$tagName = $CP->getCode($item['tag_identity']);
+				$name = (($prefix)?$prefix.':':'').$tagName;
 				//if($name==='airsyncbase:EstimatedDataSize')dump($body[$i+1]);
 				$append = '<'.$name.'';
 				array_push($elements,$name);
@@ -88,7 +88,7 @@ class WBXMLDecoder{
 					foreach($switches AS $switch){
 						$SWITCH_PAGE = $this->codepages[$switch];
 						$prefix = $SWITCH_PAGE->getPrefix();
-						$namespace = $SWITCH_PAGE->getCode($item['tag_identity']);
+						$namespace = $SWITCH_PAGE->getNamespace();
 
 						$append .= ' xmlns'.($prefix?':'.$prefix:'').'="'.($namespace ?? '').'"';
 					}
