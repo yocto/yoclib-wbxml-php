@@ -328,6 +328,8 @@ class WBXML{
 //		}
 //		$output .= chr($this->version);
 
+		rewind($stream);
+
 		return stream_get_contents($stream);
 	}
 
