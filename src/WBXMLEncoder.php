@@ -1,13 +1,26 @@
 <?php
 namespace YOCLIB\WBXML;
 
+use DOMDocument;
+
 class WBXMLEncoder{
 
-	private $stream;
+	private $codepages;
 
-	public function encode(string $input){
-//		$stream = fopen('data://text/plain;base64,'.base64_encode($input),'rb');
-//		return $this->decodeStream($stream);
+	/**
+	 * WBXMLDecoder constructor.
+	 * @param WBXMLCodePage[] $codepages
+	 */
+	public function __construct(array $codepages){
+		$this->codepages = $codepages;
+	}
+
+	public function encode(string $input): ?string{
+		return new DOMDocument($input);
+	}
+
+	public function encodeStream($stream): ?string{
+		return $this->encode(stream_get_contents($stream));
 	}
 
 }

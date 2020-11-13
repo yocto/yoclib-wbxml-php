@@ -29,7 +29,7 @@ class WBXMLDecoder{
 	 * @throws WBXMLException
 	 */
 	public function decodeStream($stream): ?string{
-		$output = '';
+		$output = '<?xml version="1.0" encoding="utf-8"?>';
 
 		$wbxml = new WBXML;
 		$wbxml->deserializeStream($stream);
@@ -41,7 +41,6 @@ class WBXMLDecoder{
 		$firstElement = true;
 
 		$elements = [];
-//		$hasSwitchedPage = true;
 
 		$switches = [0];
 		foreach($body AS $item){
