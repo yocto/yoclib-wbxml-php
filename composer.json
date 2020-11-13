@@ -1,0 +1,13 @@
+{
+    "name": "yocto/yoclib-wbxml",
+    "type": "library",
+    "require": {
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "YOCLIB\\": "src/"
+        }
+    }
+}
