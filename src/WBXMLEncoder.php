@@ -16,7 +16,11 @@ class WBXMLEncoder{
 	}
 
 	public function encode(string $input): ?string{
+		$wbxml = new WBXML;
+
 		return new DOMDocument($input);
+
+		return $wbxml->serialize();
 	}
 
 	public function encodeStream($stream): ?string{

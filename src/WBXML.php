@@ -269,36 +269,37 @@ class WBXML{
 		$this->body = $body;
 	}
 
-//	/**
-//	 * @return string
-//	 * @throws WBXMLException
-//	 */
-//	public function serialize(){
-//		$stream = fopen('data://text/plain;base64,'.base64_encode($input),'rb');
+	/**
+	 * @return string
+	 * @throws WBXMLException
+	 */
+	public function serialize(): string{
+		$stream = fopen('data://text/plain;base64,'.base64_encode(''),'rb');
+
+		$this->writeByte($stream,$this->version);
+
+		if($this->publicid_isIndex){
+			$this->writeByte($stream,0x00);
+		}
+		$this->writeMultiByteUnsignedInt($stream,$this->publicid);
+
+		$this->writeMultiByteUnsignedInt($stream,$this->charset);
+
+		$this->writeMultiByteUnsignedInt($stream,count($this->strtbl));
+		foreach($this->strtbl AS $str){
+			$this->writeByte($stream,$str);
+		}
+
+
 //		return $this->serializeStream($stream);
 //		$output = '';
 //		if($this->version===null){
 //			throw new WBXMLException('Version is null');
 //		}
 //		$output .= chr($this->version);
-//
-//		return $output;
-//	}
-//
-//	/**
-//	 * @return string
-//	 * @throws WBXMLException
-//	 */
-//	public function serializeStream(){
-//		$output = '';
-//		if($this->version===null){
-//			throw new WBXMLException('Version is null');
-//		}
-//		$output .= chr($this->version);
-//
-//		return $output;
-//	}
 
+		return stream_get_contents($stream);
+	}
 
 	/**
 	 * @param $stream
@@ -392,17 +393,5 @@ class WBXML{
 		fwrite($stream,$string);
 		fwrite($stream,chr(0));
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
