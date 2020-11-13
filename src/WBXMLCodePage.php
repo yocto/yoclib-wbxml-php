@@ -31,4 +31,8 @@ class WBXMLCodePage{
 		return $this->codes;
 	}
 
+	public function getCode(int $index){
+		return $this->codes[$index] ?? null;
+	}
+
 }

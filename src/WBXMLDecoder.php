@@ -5,6 +5,10 @@ class WBXMLDecoder{
 
 	private $codepages;
 
+	/**
+	 * WBXMLDecoder constructor.
+	 * @param WBXMLCodePage[] $codepages
+	 */
 	public function __construct(array $codepages){
 		$this->codepages = $codepages;
 	}
@@ -72,8 +76,9 @@ class WBXMLDecoder{
 			}
 			if($item['token']===null){
 				$CP = $this->codepages[$page];
-				$XMLNS = $CP['xmlns'] ?? null;
-				$name = (($XMLNS)?$XMLNS.':':'').$CP[$item['tag_identity']] ?? null;
+				$prefix = $CP->getPrefix();
+				$namespace = $CP->getCode($item['tag_identity']);
+				$name = (($prefix)?$prefix.':':'').$namespace;
 				//if($name==='airsyncbase:EstimatedDataSize')dump($body[$i+1]);
 				$append = '<'.$name.'';
 				array_push($elements,$name);
@@ -82,9 +87,10 @@ class WBXMLDecoder{
 				if($firstElement){
 					foreach($switches AS $switch){
 						$SWITCH_PAGE = $this->codepages[$switch];
-						$XMLNS = $SWITCH_PAGE['xmlns'] ?? null;
-						$namespace = $SWITCH_PAGE['namespace'] ?? null;
-						$append .= ' xmlns'.($XMLNS?':'.$XMLNS:'').'="'.($namespace ?? '').'"';
+						$prefix = $SWITCH_PAGE->getPrefix();
+						$namespace = $SWITCH_PAGE->getCode($item['tag_identity']);
+
+						$append .= ' xmlns'.($prefix?':'.$prefix:'').'="'.($namespace ?? '').'"';
 					}
 					$firstElement = false;
 				}
