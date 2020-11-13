@@ -304,7 +304,7 @@ class WBXML{
 	 * @throws WBXMLException
 	 */
 	public function serialize(): string{
-		$stream = fopen('data://text/plain;base64,'.base64_encode(''),'rb');
+		$stream = fopen('data://text/plain;base64,'.base64_encode(''),'rb+');
 
 		$this->writeByte($stream,$this->version);
 

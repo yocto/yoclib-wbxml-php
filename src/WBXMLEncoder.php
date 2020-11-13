@@ -18,7 +18,7 @@ class WBXMLEncoder{
 	/**
 	 * @param string $input
 	 * @param int $version
-	 * @return null|string
+	 * @return string|null
 	 * @throws WBXMLException
 	 */
 	public function encode(string $input,$version=0x03): ?string{
@@ -29,13 +29,19 @@ class WBXMLEncoder{
 		$wbxml->setCharset(0x6A);
 		$wbxml->setStringTable([]);
 
-		//TODO Body
+		$xml = new DOMDocument($input);
 
-		//return new DOMDocument($input);
+		//TODO Body
+		$wbxml->setBody([]);
 
 		return $wbxml->serialize();
 	}
 
+	/**
+	 * @param $stream
+	 * @return string|null
+	 * @throws WBXMLException
+	 */
 	public function encodeStream($stream): ?string{
 		return $this->encode(stream_get_contents($stream));
 	}
