@@ -15,10 +15,23 @@ class WBXMLEncoder{
 		$this->codepages = $codepages;
 	}
 
-	public function encode(string $input): ?string{
+	/**
+	 * @param string $input
+	 * @param int $version
+	 * @return null|string
+	 * @throws WBXMLException
+	 */
+	public function encode(string $input,$version=0x03): ?string{
 		$wbxml = new WBXML;
+		$wbxml->setVersion($version);
+		$wbxml->setPublicId(0x01);
+		$wbxml->setIsIndex(false);
+		$wbxml->setCharset(0x6A);
+		$wbxml->setStringTable([]);
 
-		return new DOMDocument($input);
+		//TODO Body
+
+		//return new DOMDocument($input);
 
 		return $wbxml->serialize();
 	}

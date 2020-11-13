@@ -40,24 +40,54 @@ class WBXML{
 		return $this->version;
 	}
 
+	public function setVersion($version): self{
+		$this->version = $version;
+		return $this;
+	}
+
 	public function getPublicId(){
 		return $this->publicid;
+	}
+
+	public function setPublicId($publicId): self{
+		$this->publicid = $publicId;
+		return $this;
 	}
 
 	public function isIndex(){
 		return $this->publicid_isIndex;
 	}
 
+	public function setIsIndex($isIndex): self{
+		$this->publicid_isIndex = $isIndex;
+		return $this;
+	}
+
 	public function getCharset(){
 		return $this->charset;
+	}
+
+	public function setCharset($charset): self{
+		$this->charset = $charset;
+		return $this;
 	}
 
 	public function getStringTable(){
 		return $this->strtbl;
 	}
 
+	public function setStringTable($strtbl): self{
+		$this->strtbl = $strtbl;
+		return $this;
+	}
+
 	public function getBody(){
 		return $this->body;
+	}
+
+	public function setBody($body): self{
+		$this->body = $body;
+		return $this;
 	}
 
 	/**
