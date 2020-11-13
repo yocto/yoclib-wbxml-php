@@ -97,9 +97,9 @@ class WBXMLDecoder{
 				if($item['has_attributes']){
 					$append .= ' testAttr="testVal"';
 				}
-				if(!$item['has_content']){
-					$append .= '/';
-				}
+//				if(!$item['has_content']){
+//					$append .= '/';
+//				}
 				$append .= '>';
 				//dump('NULL',$append,'----------------------------------------------------------');
 				$output .= $append;
