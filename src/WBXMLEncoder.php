@@ -49,8 +49,10 @@ class WBXMLEncoder{
 	private function xmlToArray(DOMNode $node,$codepages): array{
 		$arr = [];
 
+		$page = 0;
+
 		if($node->hasChildNodes()){
-			$arr[] = [null,$this->getTagId($node,$codepages),'OPEN'];
+			$arr[] = [null,$this->getTagId($node,$codepages,$page,$arr),'OPEN'];
 //			if($node->hasAttributes()){
 //				//TODO Attributes
 //			}
@@ -65,7 +67,7 @@ class WBXMLEncoder{
 			if($node->nodeType===XML_TEXT_NODE){
 				$arr[] = [WBXML::STR_I,$node->nodeValue];
 			}else{
-				$arr[] = [null,$this->getTagId($node,$codepages),'SELF'];
+				$arr[] = [null,$this->getTagId($node,$codepages,$page,$arr),'SELF'];
 //				if($node->hasAttributes()){
 //					//TODO Attributes
 //				}
@@ -75,8 +77,31 @@ class WBXMLEncoder{
 		return $arr;
 	}
 
-	private function getTagId($node,$codepages){
-		return 0xFF;
+	/**
+	 * @param DOMNode $node
+	 * @param WBXMLCodePage[] $codepages
+	 * @param $page
+	 * @param $arr
+	 * @return int
+	 */
+	private function getTagId(DOMNode $node,$codepages,&$page,&$arr){
+		$prefix = $node->prefix;
+		$localname = $node->localName;
+
+		foreach($codepages AS $codePage){
+			if($codePage->getPrefix()===$prefix){
+				if($page!==$codePage->getNumber()){
+					$arr[] = [WBXML::SWITCH_PAGE,$codePage->getNumber()];
+				}
+				foreach($codePage->getCodes() AS $key=>$code){
+					if($code===$localname){
+						return $key;
+					}
+				}
+			}
+		}
+
+		return -1;
 	}
 
 }

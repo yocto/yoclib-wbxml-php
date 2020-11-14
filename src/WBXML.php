@@ -320,6 +320,11 @@ class WBXML{
 		}
 
 		foreach($this->body AS $tag){
+			if($tag[0]===self::SWITCH_PAGE){
+				$this->writeByte($stream,self::SWITCH_PAGE);
+				$this->writeByte($stream,$tag[1]);
+				continue;
+			}
 			if($tag[0]===self::END){
 				$this->writeByte($stream,self::END);
 				continue;
