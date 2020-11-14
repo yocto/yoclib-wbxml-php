@@ -93,11 +93,11 @@ class WBXMLEncoder{
 	 * @return array
 	 */
 	private function getTagId(DOMNode $node,$codepages): array{
-		$prefix = $node->prefix;
+		$namespace = $node->namespaceURI;
 		$localname = $node->localName;
 
 		foreach($codepages AS $codePage){
-			if($codePage->getPrefix()===$prefix){
+			if($codePage->getNamespace()===$namespace){
 				foreach($codePage->getCodes() AS $key=>$code){
 					if($code===$localname){
 						$returnKey = $key;
