@@ -301,7 +301,6 @@ class WBXML{
 
 	/**
 	 * @return string
-	 * @throws WBXMLException
 	 */
 	public function serialize(): string{
 		$stream = fopen('php://memory','rb+');
@@ -320,13 +319,20 @@ class WBXML{
 			$this->writeByte($stream,$str);
 		}
 
-
-//		return $this->serializeStream($stream);
-//		$output = '';
-//		if($this->version===null){
-//			throw new WBXMLException('Version is null');
-//		}
-//		$output .= chr($this->version);
+		foreach($this->body AS $tag){
+			if($tag[0]===self::END){
+				$this->writeByte($stream,self::END);
+				continue;
+			}
+			if($tag[0]===self::STR_I){
+				$this->writeTerminatedString($stream,$tag[1]);
+				continue;
+			}
+			if($tag[0]===null){
+				$this->writeByte($stream,$tag[1]);
+				continue;
+			}
+		}
 
 		rewind($stream);
 
