@@ -29,7 +29,7 @@ class WBXMLDecoder{
 	 * @throws WBXMLException
 	 */
 	public function decodeStream($stream): ?string{
-		$output = '<?xml version="1.0" encoding="utf-8"?>';
+		$output = '<?xml version="1.0" encoding="utf-8"?>'."\n";
 
 		$wbxml = new WBXML;
 		$wbxml->deserializeStream($stream);
