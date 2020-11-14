@@ -49,7 +49,7 @@ class WBXMLEncoder{
 	private function xmlToArray(DOMNode $node,$codepages): array{
 		$arr = [];
 
-		$page = 0;
+		$page = [0];
 
 		if($node->hasChildNodes()){
 			$arr[] = [null,$this->getTagId($node,$codepages,$page,$arr),'OPEN'];
@@ -90,8 +90,8 @@ class WBXMLEncoder{
 
 		foreach($codepages AS $codePage){
 			if($codePage->getPrefix()===$prefix){
-				if($page!==$codePage->getNumber()){
-					$page = $codePage->getNumber();
+				if($page[0]!==$codePage->getNumber()){
+					$page[0] = $codePage->getNumber();
 					$arr[] = [WBXML::SWITCH_PAGE,$codePage->getNumber()];
 				}
 				foreach($codePage->getCodes() AS $key=>$code){
