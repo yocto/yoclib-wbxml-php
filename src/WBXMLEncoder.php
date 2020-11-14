@@ -57,7 +57,7 @@ class WBXMLEncoder{
 				$this->page = $tag[0];
 				$arr[] = [WBXML::SWITCH_PAGE,$this->page];
 			}
-			$arr[] = [null,$this->getTagId($node,$codepages),'OPEN'];
+			$arr[] = [null,$tag[1],'OPEN'];
 //			if($node->hasAttributes()){
 //				//TODO Attributes
 //			}
