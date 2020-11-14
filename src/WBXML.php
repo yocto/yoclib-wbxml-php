@@ -330,6 +330,7 @@ class WBXML{
 				continue;
 			}
 			if($tag[0]===self::STR_I){
+				$this->writeByte($stream,self::STR_I);
 				$this->writeTerminatedString($stream,$tag[1]);
 				continue;
 			}
