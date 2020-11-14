@@ -91,6 +91,7 @@ class WBXMLEncoder{
 		foreach($codepages AS $codePage){
 			if($codePage->getPrefix()===$prefix){
 				if($page!==$codePage->getNumber()){
+					$page = $codePage->getNumber();
 					$arr[] = [WBXML::SWITCH_PAGE,$codePage->getNumber()];
 				}
 				foreach($codePage->getCodes() AS $key=>$code){
