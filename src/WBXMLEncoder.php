@@ -46,16 +46,16 @@ class WBXMLEncoder{
 		return $this->encode(stream_get_contents($stream));
 	}
 
+	private $page = 0;
+
 	private function xmlToArray(DOMNode $node,$codepages): array{
 		$arr = [];
 
-		$page = 0;
-
 		if($node->hasChildNodes()){
 			$tag = $this->getTagId($node,$codepages);
-			if($page!==$tag[0]){
-				$page = $tag[0];
-				$arr[] = [WBXML::SWITCH_PAGE,$page];
+			if($this->page!==$tag[0]){
+				$this->page = $tag[0];
+				$arr[] = [WBXML::SWITCH_PAGE,$this->page];
 			}
 			$arr[] = [null,$this->getTagId($node,$codepages),'OPEN'];
 //			if($node->hasAttributes()){
@@ -73,9 +73,9 @@ class WBXMLEncoder{
 				$arr[] = [WBXML::STR_I,$node->nodeValue];
 			}else{
 				$tag = $this->getTagId($node,$codepages);
-				if($page!==$tag[0]){
-					$page = $tag[0];
-					$arr[] = [WBXML::SWITCH_PAGE,$page];
+				if($this->page!==$tag[0]){
+					$this->page = $tag[0];
+					$arr[] = [WBXML::SWITCH_PAGE,$this->page];
 				}
 				$arr[] = [null,$tag[1],'SELF'];
 //				if($node->hasAttributes()){
