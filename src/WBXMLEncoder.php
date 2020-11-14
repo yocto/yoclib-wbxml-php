@@ -96,7 +96,14 @@ class WBXMLEncoder{
 				}
 				foreach($codePage->getCodes() AS $key=>$code){
 					if($code===$localname){
-						return $key;
+						$returnKey = $key;
+						if($node->hasAttributes()){
+							$returnKey |= 0x80;
+						}
+						if($node->hasChildNodes()){
+							$returnKey |= 0x40;
+						}
+						return $returnKey;
 					}
 				}
 			}
