@@ -49,10 +49,15 @@ class WBXMLEncoder{
 	private function xmlToArray(DOMNode $node,$codepages): array{
 		$arr = [];
 
-		$page = [0];
+		$page = 0;
 
 		if($node->hasChildNodes()){
-			$arr[] = [null,$this->getTagId($node,$codepages,$page,$arr),'OPEN'];
+			$tag = $this->getTagId($node,$codepages);
+			if($page!==$tag[0]){
+				$page = $tag[0];
+				$arr[] = [WBXML::SWITCH_PAGE,$page];
+			}
+			$arr[] = [null,$this->getTagId($node,$codepages),'OPEN'];
 //			if($node->hasAttributes()){
 //				//TODO Attributes
 //			}
@@ -67,7 +72,12 @@ class WBXMLEncoder{
 			if($node->nodeType===XML_TEXT_NODE){
 				$arr[] = [WBXML::STR_I,$node->nodeValue];
 			}else{
-				$arr[] = [null,$this->getTagId($node,$codepages,$page,$arr),'SELF'];
+				$tag = $this->getTagId($node,$codepages);
+				if($page!==$tag[0]){
+					$page = $tag[0];
+					$arr[] = [WBXML::SWITCH_PAGE,$page];
+				}
+				$arr[] = [null,$tag[1],'SELF'];
 //				if($node->hasAttributes()){
 //					//TODO Attributes
 //				}
@@ -80,20 +90,14 @@ class WBXMLEncoder{
 	/**
 	 * @param DOMNode $node
 	 * @param WBXMLCodePage[] $codepages
-	 * @param $page
-	 * @param $arr
-	 * @return int
+	 * @return array
 	 */
-	private function getTagId(DOMNode $node,$codepages,&$page,&$arr){
+	private function getTagId(DOMNode $node,$codepages): array{
 		$prefix = $node->prefix;
 		$localname = $node->localName;
 
 		foreach($codepages AS $codePage){
 			if($codePage->getPrefix()===$prefix){
-				if($page[0]!==$codePage->getNumber()){
-					$page[0] = $codePage->getNumber();
-					$arr[] = [WBXML::SWITCH_PAGE,$codePage->getNumber()];
-				}
 				foreach($codePage->getCodes() AS $key=>$code){
 					if($code===$localname){
 						$returnKey = $key;
@@ -103,13 +107,13 @@ class WBXMLEncoder{
 						if($node->hasChildNodes()){
 							$returnKey |= 0x40;
 						}
-						return $returnKey;
+						return [$codePage->getNumber(),$returnKey];
 					}
 				}
 			}
 		}
 
-		return -1;
+		return [-1,-1];
 	}
 
 }
