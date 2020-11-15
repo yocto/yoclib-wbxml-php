@@ -20,6 +20,7 @@ class WBXMLEncoder{
 	 * @param string $input
 	 * @param int $version
 	 * @return string|null
+	 * @throws WBXMLException
 	 */
 	public function encode(string $input,$version=0x03): ?string{
 		$wbxml = new WBXML;
@@ -30,7 +31,9 @@ class WBXMLEncoder{
 		$wbxml->setStringTable([]);
 
 		$xml = new DOMDocument();
-		$xml->loadXML($input);
+		if(@!$xml->loadXML($input)){
+			throw new WBXMLException('Invalid XML');
+		}
 		$arr = $this->xmlToArray($xml->firstChild,$this->codepages);
 
 		$wbxml->setBody($arr);
@@ -41,6 +44,7 @@ class WBXMLEncoder{
 	/**
 	 * @param $stream
 	 * @return string|null
+	 * @throws WBXMLException
 	 */
 	public function encodeStream($stream): ?string{
 		return $this->encode(stream_get_contents($stream));
