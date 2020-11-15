@@ -70,7 +70,10 @@ class WBXMLEncoder{
 			$arr[] = [WBXML::END];
 		}else{
 			if($node->nodeType===XML_TEXT_NODE){
-				$arr[] = [WBXML::STR_I,$node->nodeValue];
+				$str = trim($node->nodeValue);
+				if($str!==''){
+					$arr[] = [WBXML::STR_I,$node->nodeValue];
+				}
 			}else{
 				$tag = $this->getTagId($node,$codepages);
 				if($this->page!==$tag[0]){
