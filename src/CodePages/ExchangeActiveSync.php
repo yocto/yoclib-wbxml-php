@@ -561,25 +561,24 @@ class ExchangeActiveSync{
 				0x19	=> 'MoveAlways',             // 14.0, 14.1, 16.0, 16.1, 16.1
 			],'ItemOperations:','itemoperations'),
 			21	=> new WBXMLCodePage(21,[
-				0x05	=> 'UmCallerID',             // 14.0, 14.1, 16.0, 16.1
-				0x06	=> 'UmUserNotes',            // 14.0, 14.1, 16.0, 16.1
-				0x07	=> 'UmAttDuration',          // 14.0, 14.1, 16.0, 16.1
-				0x08	=> 'UmAttOrder',             // 14.0, 14.1, 16.0, 16.1
-				0x09	=> 'ConversationId',         // 14.0, 14.1, 16.0, 16.1
-				0x0A	=> 'ConversationIndex',      // 14.0, 14.1, 16.0, 16.1
-				0x0B	=> 'LastVerbExecuted',       // 14.0, 14.1, 16.0, 16.1
-				0x0C	=> 'LastVerbExecutionTime',  // 14.0, 14.1, 16.0, 16.1
-				0x0D	=> 'ReceivedAsBcc',          // 14.0, 14.1, 16.0, 16.1
-				0x0E	=> 'Sender',                 // 14.0, 14.1, 16.0, 16.1
-				0x0F	=> 'CalendarType',           // 14.0, 14.1, 16.0, 16.1
-				0x10	=> 'IsLeapMonth',            // 14.0, 14.1, 16.0, 16.1
-				0x11	=> 'AccountId',              // 14.1, 16.0, 16.1
-				0x12	=> 'FirstDayOfWeek',         // 14.1, 16.0, 16.1
-				0x13	=> 'MeetingMessageType',     // 14.1, 16.0, 16.1
-
-				0x15	=> 'IsDraft',                // 16.0, 16.1
-				0x16	=> 'Bcc',                    // 16.0, 16.1
-				0x17	=> 'Send',                   // 16.0, 16.1
+				0x05	=> 'SendMail',					// 14.0, 14.1, 16.0, 16.1
+				0x06	=> 'SmartForward',				// 14.0, 14.1, 16.0, 16.1
+				0x07	=> 'SmartReply',				// 14.0, 14.1, 16.0, 16.1
+				0x08	=> 'SaveInSentItems',			// 14.0, 14.1, 16.0, 16.1
+				0x09	=> 'ReplaceMime',				// 14.0, 14.1, 16.0, 16.1
+				0x0B	=> 'Source',					// 14.0, 14.1, 16.0, 16.1
+				0x0C	=> 'FolderId',					// 14.0, 14.1, 16.0, 16.1
+				0x0D	=> 'ItemId',					// 14.0, 14.1, 16.0, 16.1
+				0x0E	=> 'LongId',					// 14.0, 14.1, 16.0, 16.1
+				0x0F	=> 'InstanceId',				// 14.0, 14.1, 16.0, 16.1
+				0x10	=> 'Mime',						// 14.0, 14.1, 16.0, 16.1
+				0x11	=> 'ClientId',					// 14.0, 14.1, 16.0, 16.1
+				0x12	=> 'Status',					// 14.0, 14.1, 16.0, 16.1
+				0x13	=> 'AccountId',					// 14.1, 16.0, 16.1
+				0x15	=> 'Forwardees',				// 16.0, 16.1
+				0x16	=> 'Forwardee',					// 16.0, 16.1
+				0x17	=> 'ForwardeeName',				// 16.0, 16.1
+				0x18	=> 'ForwardeeEmail',			// 16.0, 16.1
 			],'ComposeMail:','composemail'),
 			22	=> new WBXMLCodePage(22,[
 				0x05	=> 'UmCallerID',             // 14.0, 14.1, 16.0, 16.1
