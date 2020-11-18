@@ -271,6 +271,12 @@ class WBXML{
 				}
 				case 0xC3:{
 					$token = 'OPAQUE';
+					try{
+						$length = $this->readMultibyteUnsignedInt($stream);
+						$content = $this->readOpaque($stream,$length);
+					}catch(WBXMLException $e){
+
+					}
 					break;
 				}
 				case 0xC4:{
@@ -332,6 +338,12 @@ class WBXML{
 			if($tag[0]===self::STR_I){
 				$this->writeByte($stream,self::STR_I);
 				$this->writeTerminatedString($stream,$tag[1]);
+				continue;
+			}
+			if($tag[0]===self::OPAQUE){
+				$this->writeByte($stream,self::OPAQUE);
+				$this->writeMultiByteUnsignedInt($stream,strlen($tag[1]));
+				$this->writeString($stream,$tag[1]);
 				continue;
 			}
 			if($tag[0]===null){

@@ -59,17 +59,23 @@ class WBXMLDecoder{
 //				$hasSwitchedPage = true;
 				continue;
 			}
+			if($item['token']==='END'){
+				$name = array_pop($elements);
+				//dump($name,$elements,'-----------------------------------------------------');
+				$append = '</'.$name.'>';
+				//dump('END',$append,'----------------------------------------------------------');
+				$output .= $append;
+				continue;
+			}
 			if($item['token']==='STR_I'){
 				$append = $item['content'];
 				//dump('STR_I',$append,$item,'----------------------------------------------------------');
 				$output .= $append;
 				continue;
 			}
-			if($item['token']==='END'){
-				$name = array_pop($elements);
-				//dump($name,$elements,'-----------------------------------------------------');
-				$append = '</'.$name.'>';
-				//dump('END',$append,'----------------------------------------------------------');
+			if($item['token']==='OPAQUE'){
+				$append = '<![CDATA['.$item['content'].']]>';
+				//dump('OPAQUE',$append,$item,'----------------------------------------------------------');
 				$output .= $append;
 				continue;
 			}

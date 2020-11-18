@@ -1,6 +1,7 @@
 <?php
 namespace YOCLIB\WBXML;
 
+use DOMCdataSection;
 use DOMDocument;
 use DOMNode;
 
@@ -73,6 +74,13 @@ class WBXMLEncoder{
 			}
 			$arr[] = [WBXML::END];
 		}else{
+			if($node->nodeType===XML_CDATA_SECTION_NODE){
+				/**@var DOMCdataSection $node*/
+				$str = trim($node->data);
+				if($str!==''){
+					$arr[] = [WBXML::OPAQUE,$node->data];
+				}
+			}
 			if($node->nodeType===XML_TEXT_NODE){
 				$str = trim($node->nodeValue);
 				if($str!==''){
