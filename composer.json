@@ -1,20 +1,21 @@
 {
-	"name": "yocto/yoclib-wbxml",
-	"type": "library",
-	"require": {
-		"php": "^7||^8"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "^7||^8||^9"
-	},
-	"autoload": {
-		"psr-4": {
-			"YOCLIB\\WBXML\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"YOCLIB\\WBXML\\Tests\\": "tests/"
-		}
+  "name": "yocto/yoclib-wbxml",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "require": {
+	"php": "^7||^8"
+  },
+  "require-dev": {
+	"phpunit/phpunit": "^7||^8||^9"
+  },
+  "autoload": {
+	"psr-4": {
+	  "YOCLIB\\WBXML\\": "src/"
 	}
+  },
+  "autoload-dev": {
+	"psr-4": {
+	  "YOCLIB\\WBXML\\Tests\\": "tests/"
+	}
+  }
 }
