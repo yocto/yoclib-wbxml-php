@@ -3,7 +3,13 @@
   "type": "library",
   "description": "This yocLibrary enables your project to encode and decode WBXML data in PHP.",
   "keywords":[
-	"yocLibrary"
+	"binary",
+	"composer",
+	"php",
+	"wbxml",
+	"xml",
+	"yocto",
+	"yoclib"
   ],
   "license": "GPL-3.0-or-later",
   "require": {
