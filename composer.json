@@ -1,9 +1,8 @@
 {
     "name": "yocto/yoclib-wbxml",
     "type": "library",
-    "require": {
-    },
     "require-dev": {
+        "phpunit/phpunit": "^7||^8||^9"
     },
     "autoload": {
         "psr-4": {
